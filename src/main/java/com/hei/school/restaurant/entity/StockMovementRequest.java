@@ -1,8 +1,7 @@
 package com.hei.school.restaurant.entity;
 
-import java.time.Instant;
-
 import com.hei.school.restaurant.entity.enums.MovementTypeEnum;
+import com.hei.school.restaurant.entity.enums.Unit;
 import lombok.*;
 
 @AllArgsConstructor
@@ -10,11 +9,9 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
 
-public class StockMovement {
-    private Integer id;
+public class StockMovementRequest {
+    private Unit unit;
+    private Double value;
     private MovementTypeEnum type;
-    private Instant creationDatetime;
-    private StockValue value;
 }
