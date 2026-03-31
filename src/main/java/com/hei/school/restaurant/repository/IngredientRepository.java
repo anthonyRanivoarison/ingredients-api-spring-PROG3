@@ -1,11 +1,15 @@
 package com.hei.school.restaurant.repository;
 
 import com.hei.school.restaurant.entity.Ingredient;
+import com.hei.school.restaurant.entity.StockMovement;
 import com.hei.school.restaurant.entity.enums.CategoryEnum;
+import com.hei.school.restaurant.entity.enums.MovementTypeEnum;
+import com.hei.school.restaurant.entity.enums.Unit;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
