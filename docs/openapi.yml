@@ -20,6 +20,36 @@ tags:
   - name: Stock
     description: Operations about stock movements
 
+paths:
+  /ingredient/${id}:
+    get:
+      tags:
+        Ingredients
+      summary: Get ingredient by ID
+      description: Returns a single ingredient identified by its ID.
+      operationId: getIngredientById
+      parameters:
+        - $ref: '#/components/parameters/IngredientId'
+      responses:
+        '200':
+          description: Successful response with the ingredient details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredient'
+                example:
+                  id: 1
+                  name: Tomato
+                  category: VEGETABLE
+                  price: 0.50
+        '404':
+          description: Ingredient not found
+          content:
+            text/plain:
+            schema:
+              type: string
+              example: "Ingredient.id=99 is not found"
+
 components:
   parameters:
     IngredientId:
