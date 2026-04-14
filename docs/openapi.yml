@@ -19,3 +19,175 @@ tags:
     description: Operations about dishes
   - name: Stock
     description: Operations about stock movements
+
+components:
+  parameters:
+    IngredientId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the ingredient.
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      example: 1
+
+    DishId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the dish.
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      example: 1
+
+  schemas:
+    Ingredient:
+      type: object
+      required:
+        - id
+        - name
+        - category
+        - price
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Unique identifier of the ingredient.
+          example: 1
+        name:
+          type: string
+          description: Name of the ingredient.
+          example: Tomato
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
+        price:
+          type: number
+          format: double
+          description: Unit price of the ingredient.
+          example: 0.50
+
+    Dish:
+      type: object
+      required:
+        - id
+        - name
+        - unitPrice
+        - ingredients
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        name:
+          type: string
+          example: Tomato Soup
+        unitPrice:
+          type: number
+          format: double
+          example: 8.00
+        dishType:
+          $ref: '#/components/schemas/DishTypeEnum'
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+
+    StockValue:
+      type: object
+      required:
+        - unit
+        - value
+      properties:
+        unit:
+          $ref: '#/components/schemas/Unit'
+        value:
+          type: number
+          format: double
+          description: Computed stock quantity at the requested datetime.
+          example: 7.0
+
+    StockMovement:
+      type: object
+      required:
+        - id
+        - creationDatetime
+        - unit
+        - value
+        - type
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        creationDatetime:
+          type: string
+          format: date-time
+          description: ISO-8601 datetime when the movement was recorded.
+          example: "2024-01-01T08:00:00Z"
+        unit:
+          $ref: '#/components/schemas/Unit'
+        value:
+          type: number
+          format: double
+          description: Quantity of the movement.
+          example: 10.0
+        type:
+          $ref: '#/components/schemas/MovementTypeEnum'
+
+    StockMovementRequest:
+      type: object
+      required:
+        - unit
+        - value
+        - type
+      properties:
+        unit:
+          $ref: '#/components/schemas/Unit'
+        value:
+          type: number
+          format: double
+          description: Quantity to add or remove.
+          example: 5.0
+        type:
+          $ref: '#/components/schemas/MovementTypeEnum'
+
+    CategoryEnum:
+      type: string
+      description: Category of the ingredient.
+      enum:
+        - VEGETABLE
+        - ANIMAL
+        - MARINE
+        - DAIRY
+        - OTHER
+      example: VEGETABLE
+
+    DishTypeEnum:
+      type: string
+      description: Type/course of the dish.
+      enum:
+        - STARTER
+        - MAIN
+        - DESSERT
+      example: MAIN
+
+    Unit:
+      type: string
+      description: Unit of measurement for stock quantities.
+      enum:
+        - PCS
+        - KG
+        - L
+      example: KG
+
+    MovementTypeEnum:
+      type: string
+      description: Direction of the stock movement.
+      enum:
+        - IN
+        - OUT
+      example: IN
