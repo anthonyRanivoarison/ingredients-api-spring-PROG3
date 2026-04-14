@@ -1,0 +1,21 @@
+openapi: 3.0.3
+
+info:
+  title: Restaurant Ingredients API
+  description: REST API for managing ingredients
+  version: 1.0.0
+  contact:
+    name: Antonio Ranivoarison
+    email: hei.antonio.4@gmail.com
+
+servers:
+  - url: http://localhost:8080
+    description: Local
+
+tags:
+  - name: Ingredients
+    description: Operations about ingredients
+  - name: Dishes
+    description: Operations about dishes
+  - name: Stock
+    description: Operations about stock movements
