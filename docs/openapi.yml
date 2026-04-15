@@ -21,7 +21,7 @@ tags:
     description: Operations about stock movements
 
 paths:
-  /ingredient/${id}:
+  /ingredients/${id}:
     get:
       tags:
         Ingredients
